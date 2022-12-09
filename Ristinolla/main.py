@@ -2,7 +2,7 @@ from funktiot import *
 import random
 import time
 
-
+#merkin valinta
 print("\n***Tervetuloa***\n")
 time.sleep(0.5)
 while True:
