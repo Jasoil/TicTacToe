@@ -1,3 +1,4 @@
+
 #laudan attribuutit
 lauta = [[1,2,3], [4,5,6], [7,8,9]]
 numerot = [1,2,3,4,5,6,7,8,9]
@@ -34,6 +35,7 @@ def muutalauta(valinta, symboli):
         lauta[2][1] = symboli
     elif(valinta == 9):
         lauta[2][2] = symboli
+
 
 
 def tarkistavoitto():
