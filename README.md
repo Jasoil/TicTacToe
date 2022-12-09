@@ -33,5 +33,5 @@ import random
 import time
 
 Työssä käytetään random kirjastoa, kun arvotaan tietokoneen valinta.
-Työssä käytetään time kirjastoa tilanteissa, jossa koodi "nukkuu" toimintojen välissä
+Työssä käytetään time kirjastoa tilanteissa, jossa koodi "nukkuu" toimintojen välissä.
 
