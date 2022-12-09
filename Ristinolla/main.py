@@ -1,4 +1,4 @@
-from metodit import *
+from funktiot import *
 import random
 import time
 
