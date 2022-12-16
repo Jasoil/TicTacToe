@@ -1,6 +1,7 @@
 from funktiot import *
 import random
 import time
+import pistetaulukko
 
 #merkin valinta
 print("\n***Tervetuloa***\n")
@@ -23,8 +24,6 @@ printlauta()
 
 #pelaaja
 vuoro = 0
-ppisteet = 0
-bpisteet = 0
 while(vuoro != "null"):
       while(vuoro == 0):
             psiirto = input("\nSyötä kokonaisluku, jonka paikalle haluat sijoittaa pelimerkin tai 'lopeta' lopettaaksesi: ")
@@ -51,9 +50,9 @@ while(vuoro != "null"):
                   print("")
                   if tarkistavoitto() == True:
                         vuoro = "null"
-                        ppisteet = ppisteet + 1
+                        pistetaulukko.pisteet['Pelaajan pisteet'] = pistetaulukko.pisteet['Pelaajan pisteet'] + 1
                         lopeta()
-                  time.sleep(2)
+                  time.sleep(1.5)
                   #botti
                   while(vuoro == 1):
                         print("\n***Tietokoneen vuoro***")
@@ -69,18 +68,17 @@ while(vuoro != "null"):
                         vuoro = 0
                         if tarkistavoitto() == True:
                               vuoro = "null"
-                              bpisteet = bpisteet + 1
+                              pistetaulukko.pisteet['Tietokoneen pisteet'] = pistetaulukko.pisteet['Tietokoneen pisteet'] + 1
                               lopeta()
                         print("\n***Pelaajan vuoro***")
-      print("\nPelaajan pisteet: " + str(ppisteet))
-      print("Tietokoneen pisteet: " + str(bpisteet))
+      print(pistetaulukko.pisteet)
       uusipeli = int(input("\nSyötä 1 pelataksesi uudestaan tai 2 lopettaaksesi: "))
       if uusipeli == 2:
             vuoro = "null"
             print("\n***Peli päättyi toivottavasti pidit peleistä!***\n")
-            if (ppisteet > bpisteet):
+            if (pistetaulukko.pisteet['Pelaajan pisteet'] > pistetaulukko.pisteet['Tietokoneen pisteet']):
                   print("Kokonaistulos: Pelaaja voitti pelin!")
-            elif (ppisteet < bpisteet):
+            elif (pistetaulukko.pisteet['Pelaajan pisteet'] < pistetaulukko.pisteet['Tietokoneen pisteet']):
                   print("Kokonastulos: Tietokone voitti pelin!")  
             else:
                   print("Kokonaistulos: Tasapeli!")
