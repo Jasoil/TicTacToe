@@ -10,7 +10,11 @@ Pelissä voitetut pelit (erät) tallennetaan ja lopettaessa ilmoitetaan pelaajal
 
 2. Työn ratkaisuperiaate
 
-Työ toteutettiin vscodessa.
+Yksi työssä ilmenneistä haasteista oli tietokoneen vuorolla tietokoneen merkin sijoittaminen pelilaudalle. Ratkaisin ongleman luomalla listan alkioita,
+jotka vastaavat pelilaudalla olevia numeroita (numerot = [1,2,3,4,5,6,7,8,9]). Pelaajan valitessa paikan johon tahtoo sijoittaa oman merkkinsä listasta
+poistetaan numero, joka vastaa pelaajan valitsemaa ruutua, ettei merkkiä voi sijoittaa samaan kohtaan tai pelilaudan ulkopuolelle.
+Tietokoneen vuorolla tietokone tallentaa muuttujaan listasta .pop metodia käyttämällä poistetun indeksin. Indeksi valikoituu metodiassa
+arpomalla random.randint metodia käyttämällä numeroiden 0 ja (numerot-1) väliltä.
 
 3.  Työn rakenne
 
