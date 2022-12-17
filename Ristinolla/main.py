@@ -1,7 +1,7 @@
 from funktiot import *
 import random
 import time
-import pistetaulukko
+import json
 
 #merkin valinta
 print("\n***Tervetuloa***\n")
@@ -11,7 +11,7 @@ while True:
         if (psymboli == "x") or (psymboli == "0"):
             time.sleep(0.25)
             print("\n***Lukitaan symboli: " + psymboli + "***")
-            time.sleep(0.75)
+            time.sleep(0.5)
             if psymboli == "x":
                   bsymboli = "0"
             elif psymboli == "0":
@@ -24,6 +24,13 @@ printlauta()
 
 #pelaaja
 vuoro = 0
+pisteet = {
+    'Pelaajan pisteet' : 0,
+    'Tietokoneen pisteet' : 0
+}
+with open('Tulostaulukko.json') as tulokset:
+      pisteet = json.load(tulokset)
+
 while(vuoro != "null"):
       while(vuoro == 0):
             psiirto = input("\nSyötä kokonaisluku, jonka paikalle haluat sijoittaa pelimerkin tai 'lopeta' lopettaaksesi: ")
@@ -50,38 +57,40 @@ while(vuoro != "null"):
                   print("")
                   if tarkistavoitto() == True:
                         vuoro = "null"
-                        pistetaulukko.pisteet['Pelaajan pisteet'] = pistetaulukko.pisteet['Pelaajan pisteet'] + 1
+                        pisteet['Pelaajan pisteet'] = pisteet['Pelaajan pisteet'] + 1
                         lopeta()
-                  time.sleep(1.5)
+                  time.sleep(1)
                   #botti
                   while(vuoro == 1):
                         print("\n***Tietokoneen vuoro***")
                         time.sleep(0.25)
                         print("Tietokone valitsee...")
-                        time.sleep(1)
+                        time.sleep(0.75)
                         bsiirto = numerot.pop(random.randint(0,len(numerot)-1))
                         print("Tietokone valitsi paikan: " + str(bsiirto))
-                        time.sleep(0.5)
+                        time.sleep(0.25)
                         muutalauta(bsiirto, bsymboli)
                         printlauta()
                         print("")
                         vuoro = 0
                         if tarkistavoitto() == True:
                               vuoro = "null"
-                              pistetaulukko.pisteet['Tietokoneen pisteet'] = pistetaulukko.pisteet['Tietokoneen pisteet'] + 1
+                              pisteet['Tietokoneen pisteet'] = pisteet['Tietokoneen pisteet'] + 1
                               lopeta()
                         print("\n***Pelaajan vuoro***")
-      print(pistetaulukko.pisteet)
+      print(pisteet)
       uusipeli = int(input("\nSyötä 1 pelataksesi uudestaan tai 2 lopettaaksesi: "))
       if uusipeli == 2:
             vuoro = "null"
             print("\n***Peli päättyi toivottavasti pidit peleistä!***\n")
-            if (pistetaulukko.pisteet['Pelaajan pisteet'] > pistetaulukko.pisteet['Tietokoneen pisteet']):
+            if (pisteet['Pelaajan pisteet'] > pisteet['Tietokoneen pisteet']):
                   print("Kokonaistulos: Pelaaja voitti pelin!")
-            elif (pistetaulukko.pisteet['Pelaajan pisteet'] < pistetaulukko.pisteet['Tietokoneen pisteet']):
+            elif (pisteet['Pelaajan pisteet'] < pisteet['Tietokoneen pisteet']):
                   print("Kokonastulos: Tietokone voitti pelin!")  
             else:
                   print("Kokonaistulos: Tasapeli!")
+            with open('tulostaulukko.json','w') as tulokset:
+                  json.dump(pisteet, tulokset)
       elif uusipeli == 1:
             vuoro = 0
             muutalauta(1,1)
